@@ -25,7 +25,7 @@ def charger_fichier_wav(chemin_fichier):
 
             # Si l'audio est stéréo, le convertir en tableau 2D
             if nb_canaux == 2:
-                donnees_audio = np.reshape(donnees_audio, (nb_frames, nb_canaux))
+                donnees_audio = 0.75* np.reshape(donnees_audio, (nb_frames, nb_canaux))
             
             return donnees_audio, taux_echantillonnage, nb_canaux
     except FileNotFoundError:
@@ -69,7 +69,7 @@ def somme_dephasee_variable(donnees_audio, taux_echantillonnage, amplitude_max_d
     # Normalisation pour éviter les saturations
     max_val = np.max(np.abs(signal_somme))
     if max_val > 0:
-        signal_somme = signal_somme / max_val * np.iinfo(donnees_audio.dtype).max
+        signal_somme = (signal_somme / max_val * np.iinfo(donnees_audio.dtype).max) *0.75
 
     return signal_somme.astype(donnees_audio.dtype)
 
